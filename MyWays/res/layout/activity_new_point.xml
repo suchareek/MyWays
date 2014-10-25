@@ -30,6 +30,66 @@
             android:layout_gravity="bottom|right"
             android:onClick="addNewPoint"
             android:text="Zatwierdź" />
+
+        <EditText
+            android:id="@+id/pointName"
+            android:maxLength="20"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/pointDescription"
+            android:maxLength="200"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="80dp"
+            android:ems="10" />
+
+        <RatingBar
+            android:id="@+id/markBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="200dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:text="Twoja ocena"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nazwa"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:text="Opis"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
         
     </FrameLayout>    
 

@@ -73,6 +73,8 @@ public class MapActivity extends FragmentActivity {
 	public void addPoint(View v)
 	{
 		Intent j = new Intent(MapActivity.this, NewPoint.class);
+		j.putExtra("lat", lat);
+		j.putExtra("long", lng);
 		startActivity(j);
 	}
 	

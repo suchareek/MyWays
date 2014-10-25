@@ -2,6 +2,7 @@ package com.example.database;
 
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -121,6 +122,18 @@ public class DatabaseHandler {
 	    }
 		
 		return zwroc;
+	}
+	
+	public long createPoint(String name, String desc, double lat, double lng, int mark)
+	{
+		ContentValues values = new ContentValues();
+        values.put(PointName, name);
+        values.put(PointLat, lat);
+        values.put(PointLong, lng);
+        values.put(PointDescription, desc);
+        values.put(PointMark, mark);
+        
+        return mydb.insert(TPoint, null, values);
 	}
 	
 }
