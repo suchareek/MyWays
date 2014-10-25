@@ -1,0 +1,37 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:id="@+id/aCenter"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="300dp"
+        android:background="#383838" >
+        
+        <Button
+            android:id="@+id/cancelPoint"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:onClick="cancelAdd" 
+            android:text="Anuluj"/>
+
+        <Button
+            android:id="@+id/newPoint"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:onClick="addNewPoint"
+            android:text="Zatwierdź" />
+        
+    </FrameLayout>    
+
+</LinearLayout>
+
