@@ -2,6 +2,8 @@ package com.example.myways;
 
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -9,10 +11,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.database.DatabaseHandler;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,12 +28,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapActivity extends FragmentActivity {
 	
 	private GoogleMap map;
-	private Button viewChangeButton, addPointButton;
-	private int userIcon;
+	private Button viewChangeButton, addPointButton, showPointButton;
+	private int userIcon,pointIcon;
 	private double lat,lng;
 	private LocationManager mlocManager;
 	private MyLocationListener mlocListener;
 	private Marker userMarker;
+	private DatabaseHandler myDataBase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class MapActivity extends FragmentActivity {
 		
 		viewChangeButton = (Button) findViewById(R.id.viewChange);
 		addPointButton = (Button) findViewById(R.id.addPoint);
+		showPointButton = (Button) findViewById(R.id.showPoints);
 		
 		map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		
@@ -47,6 +53,7 @@ public class MapActivity extends FragmentActivity {
 		map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(50.061452, 19.937925),12.0f), 1000, null);
 		
 		userIcon = R.drawable.yellow_point;
+		pointIcon = R.drawable.green_point;
 		
 		mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		
@@ -72,10 +79,37 @@ public class MapActivity extends FragmentActivity {
 	
 	public void addPoint(View v)
 	{
-		Intent j = new Intent(MapActivity.this, NewPoint.class);
+		Intent j = new Intent(MapActivity.this, NewPointActivity.class);
 		j.putExtra("lat", lat);
 		j.putExtra("long", lng);
 		startActivity(j);
+	}
+	
+	public void showPoints(View v)
+	{
+		myDataBase=new DatabaseHandler(this);
+		myDataBase.open();
+		
+		ArrayList<Point> points = new ArrayList<Point>();
+		
+		points=myDataBase.getPoints();
+		
+		LatLng lastLatLng;
+		
+		for(int i=0; i<points.size(); i++)
+		{
+			lastLatLng = new LatLng(points.get(i).getPointLat(),points.get(i).getPointLong());
+			
+			map.addMarker(new MarkerOptions()
+	    	.position(lastLatLng)
+	    	.title(points.get(i).getPointName())
+	    	.icon(BitmapDescriptorFactory.fromResource(pointIcon))
+	    	.snippet(""));
+		}
+		
+		
+		
+		myDataBase.close();
 	}
 	
 	private void updatePlaces()
@@ -129,6 +163,42 @@ public class MapActivity extends FragmentActivity {
 			
 		}
 		
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		Log.d("onResume", "MapActivity onResume");
+		
+		myDataBase=new DatabaseHandler(this);
+		myDataBase.open();
+		
+		ArrayList<Point> points = new ArrayList<Point>();
+		
+		points=myDataBase.getPoints();
+		
+		LatLng lastLatLng = new LatLng(points.get(points.size()-1).getPointLat(),points.get(points.size()-1).getPointLong());
+		
+		map.addMarker(new MarkerOptions()
+    	.position(lastLatLng)
+    	.title(points.get(points.size()-1).getPointName())
+    	.icon(BitmapDescriptorFactory.fromResource(pointIcon))
+    	.snippet(""));
+		
+		myDataBase.close();
+		
+	}
+	
+	@Override
+	protected void onStop() {
+	    super.onStop();
+	    Log.d("onStop", "MapActivity onStop");
+	}
+
+	@Override
+	protected void onDestroy() {
+	    super.onDestroy();
+	    Log.d("onStop", "MapActivity onDestroy");
 	}
 
 }

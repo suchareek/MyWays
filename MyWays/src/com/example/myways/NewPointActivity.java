@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.database.DatabaseHandler;
 
-public class NewPoint extends Activity {
+public class NewPointActivity extends Activity {
 	
 	private Button cancelButton, confirmButton;
 	private EditText pointName, pointDesc;
@@ -60,6 +60,7 @@ public class NewPoint extends Activity {
 			}
 			else
 			{
+				myDataBase.close();
 				Toast.makeText( getApplicationContext(),"Pomyœlnie zapisano punkt", Toast.LENGTH_SHORT ).show();
 				finish();
 			}

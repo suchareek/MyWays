@@ -111,7 +111,7 @@ public class DatabaseHandler {
 	{
 		ArrayList<Point> zwroc=new ArrayList<Point>();
 		
-		String query="SELECT PointID, PointName, PointLa, PointLong, PointDescription, PointMark FROM Point;";
+		String query="SELECT PointID, PointName, PointLat, PointLong, PointDescription, PointMark FROM Point;";
 		Cursor cursor = mydb.rawQuery(query, null);
 		
 		if (cursor.moveToFirst()) {

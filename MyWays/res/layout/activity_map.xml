@@ -50,18 +50,32 @@
 
         <Button
             android:id="@+id/viewChange"
-            android:layout_width="295dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
-            android:onClick="viewChange" />
+            android:onClick="viewChange"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/addPoint"
-            android:layout_width="295dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:onClick="addPoint"
-            android:text="Dodaj punkt" />
+            android:text="Dodaj punkt"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/showPoints"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:onClick="showPoints"
+            android:text="Pokaż punkty"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
     </FrameLayout>
 

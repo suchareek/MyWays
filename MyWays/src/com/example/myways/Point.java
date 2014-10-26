@@ -12,11 +12,41 @@ public class Point {
 	public Point(int id, String name, double lat, double longg, String desc, int mark)
 	{
 		this.pointID=id;
-		this.pointName=name;
-		this.pointLat=lat;
-		this.pointLong=longg;
+		this.setPointName(name);
+		this.setPointLat(lat);
+		this.setPointLong(longg);
 		this.pointDescription=desc;
 		this.pointMark=mark;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return this.pointID +". "+this.pointName+",  "+this.pointMark;
+	}
+
+	public double getPointLat() {
+		return pointLat;
+	}
+
+	public void setPointLat(double pointLat) {
+		this.pointLat = pointLat;
+	}
+
+	public double getPointLong() {
+		return pointLong;
+	}
+
+	public void setPointLong(double pointLong) {
+		this.pointLong = pointLong;
+	}
+
+	public String getPointName() {
+		return pointName;
+	}
+
+	public void setPointName(String pointName) {
+		this.pointName = pointName;
 	}
 	
 	

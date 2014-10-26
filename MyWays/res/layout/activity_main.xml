@@ -21,12 +21,18 @@
     <FrameLayout
         android:id="@+id/center"
         android:layout_width="match_parent"
-        android:layout_height="136dp"
+        android:layout_height="800dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="#dadada" >
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
 
     </FrameLayout>
     
@@ -42,12 +48,27 @@
 
         <Button
             android:id="@+id/launchMap"
-            android:layout_width="fill_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
             android:onClick="launchMap"
             android:text="Mapa"
-            android:textColor="#ffffff" />
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/showPoints"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="showPoints"
+            android:text="Wszystkie punkty"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
     </FrameLayout>
 

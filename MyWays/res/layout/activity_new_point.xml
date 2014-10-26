@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:onClick="cancelAdd" 
-            android:text="Anuluj"/>
+            android:text="Anuluj"
+            android:textColor="#000000"
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/newPoint"
@@ -29,7 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:onClick="addNewPoint"
-            android:text="Zatwierdź" />
+            android:text="Zatwierdź"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/pointName"
