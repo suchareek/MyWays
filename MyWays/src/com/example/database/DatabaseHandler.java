@@ -12,11 +12,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.myways.Point;
+import com.example.myways.Route;
 
 
 public class DatabaseHandler {
 	
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	
 	private static final String dbName = "DBways.db";
 	
@@ -32,11 +33,12 @@ public class DatabaseHandler {
 	public static final String WayID = "WayID";
 	public static final String WayName = "WayName";
 	public static final String WayDescription = "WayDescription";
-	public static final String WayMark = "WayMark";
-	public static final String StartLat = "StartLat";
-	public static final String StartLong = "StartLong";
-	public static final String StopLat = "StopLat";
-	public static final String StopLong = "StopLong";
+	
+	public static final String TCoordinates = "Coordinates";
+	public static final String CoorID = "CoordinateID";
+	public static final String CWayID = "WayID";
+	public static final String CLat = "Latitude";
+	public static final String CLong = "Longitude";
 	
 	private static final String PointCreate = "CREATE TABLE "+
 			TPoint+"( "+PointID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +PointName+" TEXT NOT NULL, "+
@@ -44,9 +46,12 @@ public class DatabaseHandler {
 			PointDescription+ " TEXT NOT NULL, " +PointMark+" INTEGER); ";
 	
 	private static final String WayCreate= "CREATE TABLE "+TWay+"( "+WayID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+WayName+" TEXT NOT NULL, "+WayDescription+" TEXT NOT NULL, "+WayMark+" INTEGER NOT NULL, "+
-			StartLat+" REAL NOT NULL, "+ StartLong + "REAL NOT NULL, "+ 
-			StopLat+" REAL NOT NULL, "+ StopLong + "REAL NOT NULL); ";
+			+WayName+" TEXT NOT NULL, "+WayDescription+" TEXT NOT NULL); ";
+	
+	private static final String CoordinateCreate = "CREATE TABLE "+
+			TCoordinates+"( "+CoorID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +CWayID+" INT NOT NULL, "+
+			CLat+" REAL NOT NULL, "+CLong+" REAL NOT NULL," +
+			" FOREIGN KEY("+CWayID+") REFERENCES "+TWay+" ("+WayID+"));";
 	
 	private SQLiteDatabase mydb;
 	private final Context myContext;
@@ -63,7 +68,8 @@ public class DatabaseHandler {
 	    public void onCreate(SQLiteDatabase db) {
 	        
 	    	db.execSQL(PointCreate);
-	        db.execSQL(WayCreate);      
+	        db.execSQL(WayCreate);   
+	        db.execSQL(CoordinateCreate);
 	        
 	    }
 
@@ -107,6 +113,40 @@ public class DatabaseHandler {
 		myDatabaseHelper.close();
 	}
 	
+	public ArrayList<Route> getRoutes()
+	{
+		ArrayList<Route> zwroc=new ArrayList<Route>();
+		
+		String query="SELECT WayID, WayName, WayDescription FROM Way;";
+		Cursor cursor = mydb.rawQuery(query, null);
+		
+		if (cursor.moveToFirst()) {
+	        do {
+	        	Route route = new Route(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2));
+	            zwroc.add(route);
+	        } while (cursor.moveToNext());
+	    }
+		
+		return zwroc;
+	}
+	
+	public ArrayList<Point> getCoordinates(int id)
+	{
+		ArrayList<Point> zwroc = new ArrayList<Point>();
+		
+		String query="SELECT Latitude, Longitude FROM Coordinates WHERE WayID = "+id+";";
+		Cursor cursor = mydb.rawQuery(query, null);
+		
+		if (cursor.moveToFirst()) {
+	        do {
+	        	Point point = new Point(Double.parseDouble(cursor.getString(0)), Double.parseDouble(cursor.getString(1)));
+	            zwroc.add(point);
+	        } while (cursor.moveToNext());
+	    }
+		
+		return zwroc;
+	}
+	
 	public ArrayList<Point> getPoints()
 	{
 		ArrayList<Point> zwroc=new ArrayList<Point>();
@@ -116,8 +156,8 @@ public class DatabaseHandler {
 		
 		if (cursor.moveToFirst()) {
 	        do {
-	        	Point room = new Point(Integer.parseInt(cursor.getString(0)),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),cursor.getString(4),Integer.parseInt(cursor.getString(5)));
-	            zwroc.add(room);
+	        	Point point = new Point(Integer.parseInt(cursor.getString(0)),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),cursor.getString(4),Integer.parseInt(cursor.getString(5)));
+	            zwroc.add(point);
 	        } while (cursor.moveToNext());
 	    }
 		

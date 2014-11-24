@@ -27,8 +27,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends FragmentActivity {
 	
+	private static boolean IS_REGISTER;
+	
 	private GoogleMap map;
-	private Button viewChangeButton, addPointButton, showPointButton;
+	private Button viewChangeButton, addPointButton, showPointButton, registerButton;
 	private int userIcon,pointIcon;
 	private double lat,lng;
 	private LocationManager mlocManager;
@@ -44,6 +46,10 @@ public class MapActivity extends FragmentActivity {
 		viewChangeButton = (Button) findViewById(R.id.viewChange);
 		addPointButton = (Button) findViewById(R.id.addPoint);
 		showPointButton = (Button) findViewById(R.id.showPoints);
+		registerButton = (Button) findViewById(R.id.registerRoute);
+		
+		registerButton.setText("Rejestruj Trasê");
+		IS_REGISTER = false;
 		
 		map = ((SupportMapFragment)  getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		
@@ -61,6 +67,35 @@ public class MapActivity extends FragmentActivity {
 
 		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, mlocListener);
 		
+	}
+	
+	public void register(View v)
+	{
+		
+		if (registerButton.getText()=="Rejestruj Trasê")
+		{
+			registerButton.setText("STOP");
+			IS_REGISTER=true;
+		}
+		else
+		{
+			registerButton.setText("Rejestruj Trasê");
+			IS_REGISTER=false;
+		}
+		
+		/*/ Instantiates a new Polyline object and adds points to define a rectangle
+		PolylineOptions rectOptions = new PolylineOptions()
+		        .add(new LatLng(50.04, 19.91))
+		        .add(new LatLng(50.04, 19.93))  // North of the previous point, but at the same longitude
+		        .add(new LatLng(50.04, 19.95))  // Same latitude, and 30km to the west
+		        .add(new LatLng(50.04, 19.97))  // Same longitude, and 16km to the south
+		        .add(new LatLng(50.04, 19.99))
+		        .color(Color.RED)
+		        .width(4); // Closes the polyline.
+
+
+		// Get back the mutable Polyline
+		Polyline polyline = map.addPolyline(rectOptions);*/
 	}
 	
 	public void viewChange(View v)

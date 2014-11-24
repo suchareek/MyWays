@@ -19,6 +19,12 @@ public class Point {
 		this.pointMark=mark;
 	}
 	
+	public Point(double lat, double longg)
+	{
+		this.setPointLat(lat);
+		this.setPointLong(longg);
+	}
+	
 	@Override
 	public String toString() {
 		
