@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,7 +14,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.database.DatabaseHandler;
@@ -24,19 +29,24 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapActivity extends FragmentActivity {
 	
 	private static boolean IS_REGISTER;
 	
 	private GoogleMap map;
-	private Button viewChangeButton, addPointButton, showPointButton, registerButton;
+	private Button viewChangeButton, addPointButton, showPointButton, registerButton, showRoutesButton;
 	private int userIcon,pointIcon, registerRouteId, licznikCzasu;
 	private double lat,lng;
 	private LocationManager mlocManager;
 	private MyLocationListener mlocListener;
 	private Marker userMarker;
 	private DatabaseHandler myDataBase;
+	private ListView routeList;
+	private ArrayAdapter<Route> routeAdapter;
+	private Polyline polyline;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +57,8 @@ public class MapActivity extends FragmentActivity {
 		addPointButton = (Button) findViewById(R.id.addPoint);
 		showPointButton = (Button) findViewById(R.id.showPoints);
 		registerButton = (Button) findViewById(R.id.registerRoute);
+		routeList = (ListView) findViewById(R.id.routeList);
+		showRoutesButton = (Button) findViewById(R.id.showRoutes);
 		
 		myDataBase=new DatabaseHandler(this);
 		
@@ -71,12 +83,49 @@ public class MapActivity extends FragmentActivity {
 
 		mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, mlocListener);
 		
+		routeList.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				
+				Route route =(Route) routeList.getItemAtPosition(position);
+				
+				ArrayList<Point> pts = myDataBase.getCoordinates(route.getRouteID());
+				
+				PolylineOptions rectOptions = new PolylineOptions()
+						.color(Color.RED)
+				        .width(4);
+				
+				for(int i=0; i<pts.size(); i++)
+				{
+					rectOptions.add(new LatLng(pts.get(i).getPointLat(), pts.get(i).getPointLong()));
+				}
+				
+				polyline = map.addPolyline(rectOptions);
+						
+			}
+		});
+		
+	}
+	
+	public void showRoutes(View v)
+	{
+		myDataBase.open();
+		
+		ArrayList<Route> routes = new ArrayList<Route>();
+		
+		routes=myDataBase.getRoutes();
+		
+		//myDataBase.close();
+		
+		routeAdapter = new ArrayAdapter<Route>(this, R.layout.text, routes);
+		System.out.println(routes.size());
+		routeList.setAdapter(routeAdapter);
 	}
 	
 	public void register(View v)
 	{
-		
-		
 		
 		if (registerButton.getText()=="Rejestruj Trasê")
 		{
@@ -110,19 +159,6 @@ public class MapActivity extends FragmentActivity {
 			//myDataBase.close();
 		}
 		
-		/*/ Instantiates a new Polyline object and adds points to define a rectangle
-		PolylineOptions rectOptions = new PolylineOptions()
-		        .add(new LatLng(50.04, 19.91))
-		        .add(new LatLng(50.04, 19.93))  // North of the previous point, but at the same longitude
-		        .add(new LatLng(50.04, 19.95))  // Same latitude, and 30km to the west
-		        .add(new LatLng(50.04, 19.97))  // Same longitude, and 16km to the south
-		        .add(new LatLng(50.04, 19.99))
-		        .color(Color.RED)
-		        .width(4); // Closes the polyline.
-
-
-		// Get back the mutable Polyline
-		Polyline polyline = map.addPolyline(rectOptions);*/
 	}
 	
 	public void viewChange(View v)
@@ -205,7 +241,7 @@ public class MapActivity extends FragmentActivity {
 			{
 				licznikCzasu=0;
 				
-				if(myDataBase.addCoordinates(registerRouteId, lat, lng)==-1)
+				if(myDataBase.addCoordinates(registerRouteId+1, lat, lng)==-1)
 				{
 					Toast.makeText( getApplicationContext(),"Blad zapisu w bazie danych",	Toast.LENGTH_SHORT ).show();
 				}

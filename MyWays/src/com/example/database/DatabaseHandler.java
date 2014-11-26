@@ -140,7 +140,6 @@ public class DatabaseHandler {
 		
 		String query="SELECT WayID, WayName, WayDescription, WayMark FROM Way;";
 		Cursor cursor = mydb.rawQuery(query, null);
-		System.out.println(cursor.getCount());
 		if (cursor.moveToFirst()) {
 	        do {
 	        	Route route = new Route(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),Integer.parseInt(cursor.getString(3)));

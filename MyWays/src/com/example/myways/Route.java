@@ -14,6 +14,12 @@ public class Route {
 		this.routeDescription = routeDescription;
 		this.setRouteMark(markk);
 	}
+	
+	@Override
+	public String toString() {
+		
+		return this.routeID +". "+this.routeName+",  "+this.routeMark;
+	}
 
 	public int getRouteID() {
 		return routeID;

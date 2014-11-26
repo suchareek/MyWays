@@ -79,9 +79,28 @@
 
         <Button
             android:id="@+id/registerRoute"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
             android:onClick="register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="30sp" />
+
+        <ListView
+            android:id="@+id/routeList"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="60dp" >
+
+        </ListView>
+
+        <Button
+            android:id="@+id/showRoutes"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:onClick="showRoutes"
+            android:textSize="30sp"
+            android:text="Pokaż trasy" />
 
     </FrameLayout>
 

@@ -2,6 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android" 
  android:id="@+id/Row"  
  android:layout_width="fill_parent"  
- android:layout_height="wrap_content" 
+ android:layout_height="wrap_content"
+ android:textColor="#F70814" 
  android:textSize="30sp" > 
 </TextView>
