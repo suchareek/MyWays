@@ -31,7 +31,7 @@ public class MapActivity extends FragmentActivity {
 	
 	private GoogleMap map;
 	private Button viewChangeButton, addPointButton, showPointButton, registerButton;
-	private int userIcon,pointIcon;
+	private int userIcon,pointIcon, registerRouteId, licznikCzasu;
 	private double lat,lng;
 	private LocationManager mlocManager;
 	private MyLocationListener mlocListener;
@@ -47,6 +47,10 @@ public class MapActivity extends FragmentActivity {
 		addPointButton = (Button) findViewById(R.id.addPoint);
 		showPointButton = (Button) findViewById(R.id.showPoints);
 		registerButton = (Button) findViewById(R.id.registerRoute);
+		
+		myDataBase=new DatabaseHandler(this);
+		
+		licznikCzasu=0;
 		
 		registerButton.setText("Rejestruj Trasê");
 		IS_REGISTER = false;
@@ -72,15 +76,38 @@ public class MapActivity extends FragmentActivity {
 	public void register(View v)
 	{
 		
+		
+		
 		if (registerButton.getText()=="Rejestruj Trasê")
 		{
-			registerButton.setText("STOP");
-			IS_REGISTER=true;
+			myDataBase.open();
+			
+			ArrayList<Route> r = myDataBase.getRoutes();
+			
+			if(r.size()>0)
+			{
+				registerButton.setText("STOP");
+				
+				registerRouteId = r.get(r.size()-1).getRouteID();
+				
+				licznikCzasu=0;
+				
+				IS_REGISTER=true;
+			}
+			
+			Intent j = new Intent(MapActivity.this, NewRouteActivity.class);
+			startActivity(j);
+			
 		}
 		else
 		{
 			registerButton.setText("Rejestruj Trasê");
+			
 			IS_REGISTER=false;
+			
+			licznikCzasu=0;
+			
+			//myDataBase.close();
 		}
 		
 		/*/ Instantiates a new Polyline object and adds points to define a rectangle
@@ -142,14 +169,12 @@ public class MapActivity extends FragmentActivity {
 	    	.snippet(""));
 		}
 		
-		
-		
-		myDataBase.close();
+		//myDataBase.close();
 	}
 	
 	private void updatePlaces()
 	{
-		Location lastLoc = mlocManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		//Location lastLoc = mlocManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		
 		LatLng lastLatLng = new LatLng(lat,lng);
 		
@@ -175,6 +200,21 @@ public class MapActivity extends FragmentActivity {
 		{
 			lat = loc.getLatitude();
 			lng = loc.getLongitude();
+			
+			if(licznikCzasu>8 && IS_REGISTER)
+			{
+				licznikCzasu=0;
+				
+				if(myDataBase.addCoordinates(registerRouteId, lat, lng)==-1)
+				{
+					Toast.makeText( getApplicationContext(),"Blad zapisu w bazie danych",	Toast.LENGTH_SHORT ).show();
+				}
+				
+			}
+			else
+			{
+				licznikCzasu++;
+			}
 			
 			updatePlaces();
 			
@@ -212,15 +252,19 @@ public class MapActivity extends FragmentActivity {
 		
 		points=myDataBase.getPoints();
 		
-		LatLng lastLatLng = new LatLng(points.get(points.size()-1).getPointLat(),points.get(points.size()-1).getPointLong());
+		if(points.size()>0)
+		{
+			LatLng lastLatLng = new LatLng(points.get(points.size()-1).getPointLat(),points.get(points.size()-1).getPointLong());
+			
+			map.addMarker(new MarkerOptions()
+	    	.position(lastLatLng)
+	    	.title(points.get(points.size()-1).getPointName())
+	    	.icon(BitmapDescriptorFactory.fromResource(pointIcon))
+	    	.snippet(""));
 		
-		map.addMarker(new MarkerOptions()
-    	.position(lastLatLng)
-    	.title(points.get(points.size()-1).getPointName())
-    	.icon(BitmapDescriptorFactory.fromResource(pointIcon))
-    	.snippet(""));
+		}
 		
-		myDataBase.close();
+		//myDataBase.close();
 		
 	}
 	

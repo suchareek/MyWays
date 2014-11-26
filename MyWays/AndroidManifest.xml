@@ -52,8 +52,12 @@
 
         <activity
             android:name=".NewPointActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:label="@string/title_activity_new_point" >
+            android:label="@string/title_activity_new_point"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+        <activity
+            android:name=".NewRouteActivity"
+            android:label="@string/title_activity_new_route" >
         </activity>
     </application>
 

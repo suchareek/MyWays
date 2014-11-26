@@ -1,0 +1,101 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:id="@+id/rCenter"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="300dp"
+        android:background="#383838" >
+        
+        <Button
+            android:id="@+id/cancelRoute"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:onClick="cancelAdd" 
+            android:text="Anuluj"
+            android:textColor="#000000"
+            android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/newRoute"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:onClick="addNewRoute"
+            android:text="Zatwierdź"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/routeName"
+            android:maxLength="20"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/routeDescription"
+            android:maxLength="200"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="80dp"
+            android:ems="10" />
+
+        <RatingBar
+            android:id="@+id/markBarR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="200dp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="200dp"
+            android:text="Twoja ocena"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Nazwa"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:text="Opis"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp" />
+        
+    </FrameLayout>    
+
+</LinearLayout>
+

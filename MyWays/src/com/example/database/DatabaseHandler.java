@@ -33,6 +33,7 @@ public class DatabaseHandler {
 	public static final String WayID = "WayID";
 	public static final String WayName = "WayName";
 	public static final String WayDescription = "WayDescription";
+	public static final String WayMark = "WayMark";
 	
 	public static final String TCoordinates = "Coordinates";
 	public static final String CoorID = "CoordinateID";
@@ -46,7 +47,7 @@ public class DatabaseHandler {
 			PointDescription+ " TEXT NOT NULL, " +PointMark+" INTEGER); ";
 	
 	private static final String WayCreate= "CREATE TABLE "+TWay+"( "+WayID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+WayName+" TEXT NOT NULL, "+WayDescription+" TEXT NOT NULL); ";
+			+WayName+" TEXT NOT NULL, "+WayDescription+" TEXT NOT NULL, " +WayMark+" INTEGER); ";
 	
 	private static final String CoordinateCreate = "CREATE TABLE "+
 			TCoordinates+"( "+CoorID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +CWayID+" INT NOT NULL, "+
@@ -113,16 +114,36 @@ public class DatabaseHandler {
 		myDatabaseHelper.close();
 	}
 	
+	public long createRoute(String name, String desc, int mark)
+	{
+		ContentValues values = new ContentValues();
+        values.put(WayName, name);
+        values.put(WayDescription, desc);
+        values.put(WayMark, mark);
+        
+        return mydb.insert(TWay, null, values);
+	}
+	
+	public long addCoordinates(int id, double lat, double longg)
+	{
+		ContentValues values = new ContentValues();
+        values.put(CWayID, id);
+        values.put(CLat, lat);
+        values.put(CLong, longg);
+        
+        return mydb.insert(TCoordinates, null, values);
+	}
+	
 	public ArrayList<Route> getRoutes()
 	{
 		ArrayList<Route> zwroc=new ArrayList<Route>();
 		
-		String query="SELECT WayID, WayName, WayDescription FROM Way;";
+		String query="SELECT WayID, WayName, WayDescription, WayMark FROM Way;";
 		Cursor cursor = mydb.rawQuery(query, null);
-		
+		System.out.println(cursor.getCount());
 		if (cursor.moveToFirst()) {
 	        do {
-	        	Route route = new Route(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2));
+	        	Route route = new Route(Integer.parseInt(cursor.getString(0)),cursor.getString(1),cursor.getString(2),Integer.parseInt(cursor.getString(3)));
 	            zwroc.add(route);
 	        } while (cursor.moveToNext());
 	    }

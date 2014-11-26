@@ -5,12 +5,14 @@ public class Route {
 	private int routeID;
 	private String routeName;
 	private String routeDescription;
+	private int routeMark;
 	
-	public Route(int routeID, String routeName, String routeDescription) {
+	public Route(int routeID, String routeName, String routeDescription, int markk) {
 		super();
 		this.routeID = routeID;
 		this.routeName = routeName;
 		this.routeDescription = routeDescription;
+		this.setRouteMark(markk);
 	}
 
 	public int getRouteID() {
@@ -35,6 +37,14 @@ public class Route {
 
 	public void setRouteDescription(String routeDescription) {
 		this.routeDescription = routeDescription;
+	}
+
+	public int getRouteMark() {
+		return routeMark;
+	}
+
+	public void setRouteMark(int routeMark) {
+		this.routeMark = routeMark;
 	}
 
 }
