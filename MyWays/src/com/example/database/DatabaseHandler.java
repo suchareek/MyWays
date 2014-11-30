@@ -17,7 +17,7 @@ import com.example.myways.Route;
 
 public class DatabaseHandler {
 	
-	private static final int DB_VERSION = 2;
+	private static final int DB_VERSION = 4;
 	
 	private static final String dbName = "DBways.db";
 	
@@ -79,6 +79,7 @@ public class DatabaseHandler {
 	    	
 	        db.execSQL("DROP TABLE IF EXISTS " + TPoint);
 	        db.execSQL("DROP TABLE IF EXISTS " + TWay);
+	        db.execSQL("DROP TABLE IF EXISTS " + TCoordinates);
 	        onCreate(db);
 	        
 	        Log.w("ListView DatabaseAdapter","Aktualizacja bazy z wersji " + oldVer +

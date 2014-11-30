@@ -93,16 +93,20 @@ public class MapActivity extends FragmentActivity {
 				
 				ArrayList<Point> pts = myDataBase.getCoordinates(route.getRouteID());
 				
-				PolylineOptions rectOptions = new PolylineOptions()
+				PolylineOptions pOptions = new PolylineOptions()
 						.color(Color.RED)
 				        .width(4);
 				
 				for(int i=0; i<pts.size(); i++)
 				{
-					rectOptions.add(new LatLng(pts.get(i).getPointLat(), pts.get(i).getPointLong()));
+					pOptions.add(new LatLng(pts.get(i).getPointLat(), pts.get(i).getPointLong()));
 				}
 				
-				polyline = map.addPolyline(rectOptions);
+				if(polyline != null)
+				{
+					polyline.remove();
+				}
+				polyline = map.addPolyline(pOptions);
 						
 			}
 		});
