@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
         		j.putExtra("name", p.getPointName());
         		j.putExtra("desc", p.getPointDescription());
         		j.putExtra("mark", p.getMark());
+        		j.putExtra("img", p.getImg());
         		
         		startActivity(j);
 						

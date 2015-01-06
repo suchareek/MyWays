@@ -76,10 +76,13 @@ public class NewPointActivity extends Activity {
 		{
 			myDataBase=new DatabaseHandler(this);
 			myDataBase.open();
-			
+			byte[] byteArray = null;
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
-			byte[] byteArray = stream.toByteArray();
+			if(photo != null)
+			{
+				photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+				byteArray = stream.toByteArray();
+			}
 			
 			if (myDataBase.createPoint(name, desc, lat, lng, mark, byteArray)==-1)
 			{

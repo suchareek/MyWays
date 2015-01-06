@@ -173,12 +173,12 @@ public class DatabaseHandler {
 	{
 		ArrayList<Point> zwroc=new ArrayList<Point>();
 		
-		String query="SELECT PointID, PointName, PointLat, PointLong, PointDescription, PointMark FROM Point;";
+		String query="SELECT PointID, PointName, PointLat, PointLong, PointDescription, PointMark, PointImg FROM Point;";
 		Cursor cursor = mydb.rawQuery(query, null);
 		
 		if (cursor.moveToFirst()) {
 	        do {
-	        	Point point = new Point(Integer.parseInt(cursor.getString(0)),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),cursor.getString(4),Integer.parseInt(cursor.getString(5)));
+	        	Point point = new Point(Integer.parseInt(cursor.getString(0)),cursor.getString(1),Double.parseDouble(cursor.getString(2)),Double.parseDouble(cursor.getString(3)),cursor.getString(4),Integer.parseInt(cursor.getString(5)),cursor.getBlob(6));
 	            zwroc.add(point);
 	        } while (cursor.moveToNext());
 	    }

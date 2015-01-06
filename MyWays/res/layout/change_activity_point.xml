@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/cCenter"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="600dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="300dp"
@@ -94,6 +94,15 @@
             android:text="Opis"
             android:textColor="#FFFFFF"
             android:textSize="40sp" />
+        
+        <ImageView
+    	    android:id="@+id/img"
+    	    android:layout_width="300dp"
+    	    android:layout_height="300dp"
+    	    android:layout_gravity="bottom|center"
+    	    android:layout_marginBottom="70dp" >
+    	    
+    	</ImageView>
         
     </FrameLayout>    
 

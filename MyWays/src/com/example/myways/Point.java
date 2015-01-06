@@ -8,8 +8,9 @@ public class Point {
 	private double pointLong;
 	private String pointDescription;
 	private int pointMark;
+	private byte[] img;
 	
-	public Point(int id, String name, double lat, double longg, String desc, int mark)
+	public Point(int id, String name, double lat, double longg, String desc, int mark, byte[] img)
 	{
 		this.pointID=id;
 		this.setPointName(name);
@@ -17,6 +18,7 @@ public class Point {
 		this.setPointLong(longg);
 		this.setPointDescription(desc);
 		this.pointMark=mark;
+		this.setImg(img);
 	}
 	
 	public Point(double lat, double longg)
@@ -69,6 +71,14 @@ public class Point {
 
 	public void setPointDescription(String pointDescription) {
 		this.pointDescription = pointDescription;
+	}
+
+	public byte[] getImg() {
+		return img;
+	}
+
+	public void setImg(byte[] img) {
+		this.img = img;
 	}
 	
 	
