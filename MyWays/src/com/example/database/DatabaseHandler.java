@@ -17,7 +17,7 @@ import com.example.myways.Route;
 
 public class DatabaseHandler {
 	
-	private static final int DB_VERSION = 4;
+	private static final int DB_VERSION = 5;
 	
 	private static final String dbName = "DBways.db";
 	
@@ -28,6 +28,7 @@ public class DatabaseHandler {
 	public static final String PointLong = "PointLong";
 	public static final String PointDescription = "PointDescription";
 	public static final String PointMark = "PointMark";
+	public static final String PointImg = "PointImg";
 	
 	private static final String TWay = "Way";
 	public static final String WayID = "WayID";
@@ -44,7 +45,7 @@ public class DatabaseHandler {
 	private static final String PointCreate = "CREATE TABLE "+
 			TPoint+"( "+PointID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +PointName+" TEXT NOT NULL, "+
 			PointLat+" REAL NOT NULL, "+PointLong+" REAL NOT NULL,"+ 
-			PointDescription+ " TEXT NOT NULL, " +PointMark+" INTEGER); ";
+			PointDescription+ " TEXT NOT NULL, " +PointMark+" INTEGER, "+PointImg+" BLOB); ";
 	
 	private static final String WayCreate= "CREATE TABLE "+TWay+"( "+WayID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+WayName+" TEXT NOT NULL, "+WayDescription+" TEXT NOT NULL, " +WayMark+" INTEGER); ";
@@ -185,7 +186,7 @@ public class DatabaseHandler {
 		return zwroc;
 	}
 	
-	public long createPoint(String name, String desc, double lat, double lng, int mark)
+	public long createPoint(String name, String desc, double lat, double lng, int mark, byte[] image)
 	{
 		ContentValues values = new ContentValues();
         values.put(PointName, name);
@@ -193,8 +194,29 @@ public class DatabaseHandler {
         values.put(PointLong, lng);
         values.put(PointDescription, desc);
         values.put(PointMark, mark);
+        values.put(PointImg, image);
         
         return mydb.insert(TPoint, null, values);
+	}
+	
+	public int updatePoint(int id, String name, String desc, int mark)
+	{
+		ContentValues values = new ContentValues();
+        values.put(PointName, name);
+        values.put(PointDescription, desc);
+        values.put(PointMark, mark);
+        
+        return mydb.update(TPoint, values, PointID+" = "+ id + "",null);
+	}
+	
+	public int updateRoute(int id, String name, String desc, int mark)
+	{
+		ContentValues values = new ContentValues();
+        values.put(WayName, name);
+        values.put(WayDescription, desc);
+        values.put(WayMark, mark);
+        
+        return mydb.update(TWay, values, WayID+" = "+ id + "", null);
 	}
 	
 }

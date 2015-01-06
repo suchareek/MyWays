@@ -7,7 +7,7 @@
     android:orientation="vertical" >
     
     <FrameLayout
-        android:id="@+id/rCenter"
+        android:id="@+id/rCenterc"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginLeft="5dp"
@@ -15,20 +15,28 @@
         android:layout_marginTop="300dp"
         android:background="#383838" >
         
-        
+        <Button
+            android:id="@+id/cancelcRoute"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:onClick="cancelrChange" 
+            android:text="Anuluj"
+            android:textColor="#000000"
+            android:textSize="30sp"/>
 
         <Button
-            android:id="@+id/newRoute"
+            android:id="@+id/newcRoute"
             android:layout_width="295dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:onClick="addNewRoute"
+            android:onClick="addChangeRoute"
             android:text="Zatwierdź"
             android:textColor="#000000"
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/routeName"
+            android:id="@+id/routecName"
             android:maxLength="20"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -41,7 +49,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/routeDescription"
+            android:id="@+id/routecDescription"
             android:maxLength="200"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -51,7 +59,7 @@
             android:ems="10" />
 
         <RatingBar
-            android:id="@+id/markBarR"
+            android:id="@+id/markcBarR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="280dp"

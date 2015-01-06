@@ -15,7 +15,7 @@ public class Point {
 		this.setPointName(name);
 		this.setPointLat(lat);
 		this.setPointLong(longg);
-		this.pointDescription=desc;
+		this.setPointDescription(desc);
 		this.pointMark=mark;
 	}
 	
@@ -30,7 +30,15 @@ public class Point {
 		
 		return this.pointID +". "+this.pointName+",  "+this.pointMark;
 	}
-
+	
+	public int getPointID() {
+		return pointID;
+	}
+	
+	public int getMark() {
+		return pointMark;
+	}
+	
 	public double getPointLat() {
 		return pointLat;
 	}
@@ -53,6 +61,14 @@ public class Point {
 
 	public void setPointName(String pointName) {
 		this.pointName = pointName;
+	}
+
+	public String getPointDescription() {
+		return pointDescription;
+	}
+
+	public void setPointDescription(String pointDescription) {
+		this.pointDescription = pointDescription;
 	}
 	
 	

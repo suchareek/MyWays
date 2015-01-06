@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/aCenter"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="600dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="300dp"
@@ -94,6 +94,28 @@
             android:text="Opis"
             android:textColor="#FFFFFF"
             android:textSize="40sp" />
+        
+        <Button
+            android:id="@+id/takePhoto"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="70dp"
+            android:onClick="takePhoto"
+            android:text="Zrob zdjecie"
+            android:textColor="#000000"
+            android:textSize="30sp" >
+            
+        </Button>
+        
+    	<ImageView
+    	    android:id="@+id/image"
+    	    android:layout_width="250dp"
+    	    android:layout_height="250dp"
+    	    android:layout_gravity="bottom|left"
+    	    android:layout_marginBottom="70dp" >
+    	    
+    	</ImageView>
         
     </FrameLayout>    
 
