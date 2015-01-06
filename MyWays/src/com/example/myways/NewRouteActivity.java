@@ -13,7 +13,7 @@ import com.example.database.DatabaseHandler;
 
 public class NewRouteActivity extends Activity {
 
-	private Button cancelButton, confirmButton;
+	private Button confirmButton;//,cancelButton;
 	private EditText routeName, routeDesc;
 	private RatingBar markBar;
 	private DatabaseHandler myDataBase;
@@ -23,7 +23,7 @@ public class NewRouteActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_route);
 		
-		cancelButton = (Button) findViewById(R.id.cancelRoute);
+		//cancelButton = (Button) findViewById(R.id.cancelRoute);
 		confirmButton = (Button) findViewById(R.id.newRoute);
 		routeName= (EditText) findViewById(R.id.routeName);
 		routeDesc= (EditText) findViewById(R.id.routeDescription);
@@ -31,10 +31,10 @@ public class NewRouteActivity extends Activity {
 		
 	}
 	
-	public void cancelAdd(View v)
-	{
-		finish();
-	}
+	//public void cancelAdd(View v)
+	//{
+	//	finish();
+	//}
 	
 	public void addNewRoute(View v)
 	{
@@ -59,7 +59,7 @@ public class NewRouteActivity extends Activity {
 			else
 			{
 				myDataBase.close();
-				Toast.makeText( getApplicationContext(),"Pomyœlnie zapisano punkt", Toast.LENGTH_SHORT ).show();
+				Toast.makeText( getApplicationContext(),"Pomyœlnie zapisano trase", Toast.LENGTH_SHORT ).show();
 				finish();
 			}
 		}

@@ -33,6 +33,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </ListView>
+        
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
 
     </FrameLayout>
     
@@ -48,7 +54,7 @@
 
         <Button
             android:id="@+id/launchMap"
-            android:layout_width="350dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:layout_marginBottom="5dp"
@@ -57,10 +63,22 @@
             android:text="Mapa"
             android:textColor="#000000"
             android:textSize="30sp" />
+        
+        <Button
+            android:id="@+id/showRoutes"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:onClick="showRoutes"
+            android:text="Wszystkie trasy"
+            android:textColor="#000000"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/showPoints"
-            android:layout_width="350dp"
+            android:layout_width="270dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="5dp"

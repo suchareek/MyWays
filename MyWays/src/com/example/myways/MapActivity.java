@@ -131,37 +131,54 @@ public class MapActivity extends FragmentActivity {
 	public void register(View v)
 	{
 		
-		if (registerButton.getText()=="Rejestruj Trasê")
+		if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
 		{
-			myDataBase.open();
 			
-			ArrayList<Route> r = myDataBase.getRoutes();
-			
-			if(r.size()>0)
+			if (registerButton.getText()=="Rejestruj Trasê")
 			{
-				registerButton.setText("STOP");
+				myDataBase.open();
 				
-				registerRouteId = r.get(r.size()-1).getRouteID();
+				ArrayList<Route> r = myDataBase.getRoutes();
+				
+				if(r.size()>0)
+				{
+					registerButton.setText("STOP");
+					
+					registerRouteId = r.get(r.size()-1).getRouteID();
+					
+					licznikCzasu=0;
+					
+					IS_REGISTER=true;
+				}
+				
+				Intent j = new Intent(MapActivity.this, NewRouteActivity.class);
+				startActivity(j);
+				
+			}
+			else
+			{
+				registerButton.setText("Rejestruj Trasê");
+				
+				IS_REGISTER=false;
 				
 				licznikCzasu=0;
 				
-				IS_REGISTER=true;
 			}
-			
-			Intent j = new Intent(MapActivity.this, NewRouteActivity.class);
-			startActivity(j);
-			
-		}
+	    }
 		else
 		{
+			
+			Toast.makeText( getApplicationContext(),"Wlacz GPS",	Toast.LENGTH_SHORT ).show();
+			
 			registerButton.setText("Rejestruj Trasê");
 			
 			IS_REGISTER=false;
 			
 			licznikCzasu=0;
-			
-			//myDataBase.close();
 		}
+		
+		
+		
 		
 	}
 	
