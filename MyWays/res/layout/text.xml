@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android" 
- android:id="@+id/Row"  
- android:layout_width="fill_parent"  
- android:layout_height="wrap_content"
- android:textColor="#F70814" 
- android:textSize="30sp" > 
-</TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp" >
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="400dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textColor="#FF0000"
+            android:textSize="40dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:onClick="changeRate"
+            android:layout_gravity="right|center"
+            android:isIndicator="true"
+            android:focusableInTouchMode="false"
+			android:clickable="false"
+			android:focusable="false" />
+
+    </FrameLayout>
+
+</LinearLayout>

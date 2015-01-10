@@ -45,7 +45,7 @@ public class MapActivity extends FragmentActivity {
 	private Marker userMarker;
 	private DatabaseHandler myDataBase;
 	private ListView routeList;
-	private ArrayAdapter<Route> routeAdapter;
+	private List2Adapter routeAdapter;
 	private Polyline polyline;
 
 	@Override
@@ -123,8 +123,8 @@ public class MapActivity extends FragmentActivity {
 		
 		//myDataBase.close();
 		
-		routeAdapter = new ArrayAdapter<Route>(this, R.layout.text, routes);
-		System.out.println(routes.size());
+		routeAdapter = new List2Adapter(this, R.layout.text, routes);
+
 		routeList.setAdapter(routeAdapter);
 	}
 	

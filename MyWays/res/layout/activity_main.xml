@@ -16,17 +16,23 @@
         android:layout_marginTop="5dp"
         android:background="#cacaca" >
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/napis" />
+
     </FrameLayout>
     
     <FrameLayout
         android:id="@+id/center"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
+        android:layout_height="900dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="#dadada" >
+        android:background="@drawable/tlo" >
 
         <ListView
             android:id="@+id/listView"
@@ -45,20 +51,21 @@
     <FrameLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#cccccc"
-        android:layout_marginTop="5dp" >
+        android:layout_marginTop="5dp"
+        android:background="#cccccc" >
 
         <Button
             android:id="@+id/launchMap"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:onClick="launchMap"
             android:text="Mapa"
             android:textColor="#000000"
@@ -66,11 +73,12 @@
         
         <Button
             android:id="@+id/showRoutes"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_width="235dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:onClick="showRoutes"
             android:text="Wszystkie trasy"
             android:textColor="#000000"
@@ -78,11 +86,12 @@
 
         <Button
             android:id="@+id/showPoints"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_width="265dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center"
             android:layout_marginBottom="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:onClick="showPoints"
             android:text="Wszystkie punkty"
             android:textColor="#000000"

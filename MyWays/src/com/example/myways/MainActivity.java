@@ -21,8 +21,8 @@ public class MainActivity extends Activity {
 	
 	private Button launchMap, showPoints, showRoutes;
 	private ListView pointList, routeList;
-	private ArrayAdapter<Point> pointAdapter;
-	private ArrayAdapter<Route> routeAdapter;
+	private ListAdapter pointAdapter;
+	private List2Adapter routeAdapter;
 	private DatabaseHandler myDataBase;
 
 	@Override
@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 			routeAdapter=null;
 		}
 		
-		pointAdapter = new ArrayAdapter<Point>(this, R.layout.text, points);
+		pointAdapter = new ListAdapter(this, R.layout.text, points);
 		pointList.setAdapter(pointAdapter);
 		
 	}
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 			pointAdapter=null;
 		}
 		
-		routeAdapter = new ArrayAdapter<Route>(this, R.layout.text, routes);
+		routeAdapter = new List2Adapter(this, R.layout.text, routes);
 		routeList.setAdapter(routeAdapter);
 		
 	}
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
 			
 			routes=myDataBase.getRoutes();
 			
-			routeAdapter = new ArrayAdapter<Route>(this, R.layout.text, routes);
+			routeAdapter = new List2Adapter(this, R.layout.text, routes);
 			routeList.setAdapter(routeAdapter);
 		}
 		
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
 			
 			points=myDataBase.getPoints();
 			
-			pointAdapter = new ArrayAdapter<Point>(this, R.layout.text, points);
+			pointAdapter = new ListAdapter(this, R.layout.text, points);
 			pointList.setAdapter(pointAdapter);
 		}
 		

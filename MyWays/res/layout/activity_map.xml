@@ -16,7 +16,14 @@
         android:layout_marginTop="5dp"
         android:background="#343434" >
 
-       
+        <Button
+            android:id="@+id/viewChange"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_gravity="center"
+           android:onClick="viewChange"
+           android:textColor="#000000"
+           android:textSize="30sp" />
 
     </FrameLayout>
     
@@ -49,19 +56,12 @@
         android:background="#343434" >
 
         <Button
-            android:id="@+id/viewChange"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
-            android:onClick="viewChange"
-            android:textColor="#000000"
-            android:textSize="30sp" />
-
-        <Button
             android:id="@+id/addPoint"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
             android:onClick="addPoint"
             android:text="Dodaj punkt"
             android:textColor="#000000"
@@ -69,9 +69,11 @@
 
         <Button
             android:id="@+id/showPoints"
-            android:layout_width="220dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="left|bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
             android:onClick="showPoints"
             android:text="Pokaż punkty"
             android:textColor="#000000"
@@ -81,6 +83,8 @@
             android:id="@+id/registerRoute"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:onClick="register"
             android:textSize="30sp" />
 
@@ -95,12 +99,14 @@
 
         <Button
             android:id="@+id/showRoutes"
-            android:layout_width="220dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|top"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:onClick="showRoutes"
-            android:textSize="30sp"
-            android:text="Pokaż trasy" />
+            android:text="Pokaż trasy"
+            android:textSize="30sp" />
 
     </FrameLayout>
 
