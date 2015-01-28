@@ -4,10 +4,10 @@
     <string name="app_name">MyWays</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="title_activity_new_point">NewPoint</string>
-    <string name="title_activity_new_route">NewRouteActivity</string>
-    <string name="title_activity_change_point">ChangePointActivity</string>
-    <string name="title_activity_change_route">ChangeRouteActivity</string>
+    <string name="title_activity_map">MyWays</string>
+    <string name="title_activity_new_point">MyWays</string>
+    <string name="title_activity_new_route">MyWays</string>
+    <string name="title_activity_change_point">MyWays</string>
+    <string name="title_activity_change_route">MyWays</string>
     
 </resources>

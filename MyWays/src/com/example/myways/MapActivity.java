@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -34,7 +35,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapActivity extends FragmentActivity {
 	
-	private static boolean IS_REGISTER;
+	public static boolean IS_REGISTER;
 	
 	private GoogleMap map;
 	private Button viewChangeButton, addPointButton, showPointButton, registerButton, showRoutesButton;
@@ -130,30 +131,14 @@ public class MapActivity extends FragmentActivity {
 	
 	public void register(View v)
 	{
-		
+
 		if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
 		{
-			
+
 			if (registerButton.getText()=="Rejestruj Trasê")
 			{
-				myDataBase.open();
-				
-				ArrayList<Route> r = myDataBase.getRoutes();
-				
-				if(r.size()>0)
-				{
-					registerButton.setText("STOP");
-					
-					registerRouteId = r.get(r.size()-1).getRouteID();
-					
-					licznikCzasu=0;
-					
-					IS_REGISTER=true;
-				}
-				
 				Intent j = new Intent(MapActivity.this, NewRouteActivity.class);
 				startActivity(j);
-				
 			}
 			else
 			{
@@ -161,14 +146,14 @@ public class MapActivity extends FragmentActivity {
 				
 				IS_REGISTER=false;
 				
-				licznikCzasu=0;
-				
+				licznikCzasu=0;				
 			}
 	    }
 		else
 		{
+			System.out.println("Jestesdfsfsm");
 			
-			Toast.makeText( getApplicationContext(),"Wlacz GPS",	Toast.LENGTH_SHORT ).show();
+			Toast.makeText( getApplicationContext(),"Wlacz GPS", Toast.LENGTH_SHORT ).show();
 			
 			registerButton.setText("Rejestruj Trasê");
 			
@@ -176,10 +161,7 @@ public class MapActivity extends FragmentActivity {
 			
 			licznikCzasu=0;
 		}
-		
-		
-		
-		
+	
 	}
 	
 	public void viewChange(View v)
@@ -198,10 +180,17 @@ public class MapActivity extends FragmentActivity {
 	
 	public void addPoint(View v)
 	{
-		Intent j = new Intent(MapActivity.this, NewPointActivity.class);
-		j.putExtra("lat", lat);
-		j.putExtra("long", lng);
-		startActivity(j);
+		if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+		{
+			Intent j = new Intent(MapActivity.this, NewPointActivity.class);
+			j.putExtra("lat", lat);
+			j.putExtra("long", lng);
+			startActivity(j);
+		}
+		else
+		{
+			Toast.makeText( getApplicationContext(),"Wlacz GPS", Toast.LENGTH_SHORT ).show();
+		}
 	}
 	
 	public void showPoints(View v)
@@ -264,7 +253,7 @@ public class MapActivity extends FragmentActivity {
 				
 				if(myDataBase.addCoordinates(registerRouteId+1, lat, lng)==-1)
 				{
-					Toast.makeText( getApplicationContext(),"Blad zapisu w bazie danych",	Toast.LENGTH_SHORT ).show();
+					Toast.makeText( getApplicationContext(),"Blad zapisu w bazie danych", Toast.LENGTH_SHORT ).show();
 				}
 				
 			}
@@ -280,13 +269,13 @@ public class MapActivity extends FragmentActivity {
 		@Override
 		public void onProviderDisabled(String provider)
 		{
-			Toast.makeText( getApplicationContext(),"Gps Disabled",	Toast.LENGTH_SHORT ).show();
+			Toast.makeText( getApplicationContext(),"Gps wylaczony", Toast.LENGTH_SHORT ).show();
 		}
 		
 		@Override
 		public void onProviderEnabled(String provider)
 		{
-			Toast.makeText( getApplicationContext(),"Gps Enabled",Toast.LENGTH_SHORT).show();
+			Toast.makeText( getApplicationContext(),"Gps wlaczony", Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
@@ -296,6 +285,7 @@ public class MapActivity extends FragmentActivity {
 		}
 		
 	}
+	
 	
 	@Override
 	protected void onResume(){
@@ -319,6 +309,23 @@ public class MapActivity extends FragmentActivity {
 	    	.icon(BitmapDescriptorFactory.fromResource(pointIcon))
 	    	.snippet(""));
 		
+		}
+		
+		if(IS_REGISTER)
+		{
+			
+			ArrayList<Route> r = myDataBase.getRoutes();
+			
+			if(r.size()>0)
+			{
+				registerButton.setText("STOP");
+				
+				registerRouteId = r.get(r.size()-1).getRouteID();
+				
+				licznikCzasu=0;
+				
+			}
+			
 		}
 		
 		//myDataBase.close();

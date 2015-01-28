@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ababab"
+    android:orientation="vertical" >	-->
+    
+<LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ababab"
@@ -93,7 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="320dp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="60dp" >
+            android:layout_marginBottom="70dp"
+            android:layout_marginTop="70dp" >
 
         </ListView>
 
@@ -111,3 +122,4 @@
     </FrameLayout>
 
 </LinearLayout>
+</ScrollView>
